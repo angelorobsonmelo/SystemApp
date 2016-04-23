@@ -1,0 +1,164 @@
+<meta charset="utf-8">
+
+<ul class="header-inner clearfix cor-barra-superior">
+    <li class="pull-right">
+        <ul class="top-menu">
+            <li class="hidden-xs" popover-placement="left" popover-trigger="mouseenter" popover="Sair"  data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right">
+                <a ng-href="/SystemGames/#/login-usuario"><i class="fa fa-sign-out icone-sair"></i></a>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<!-- Top Search Content -->
+<div id="top-search-wrap">
+    <div class="tsw-inner">
+        <i id="top-search-close" class="zmdi zmdi-arrow-left" data-ng-click="hctrl.closeSearch()"></i>
+        <input type="text">
+    </div>
+</div>
+<br />
+
+<div class="container" data-ng-controller="tableCtrl as tctrl">
+
+	<div class="card">
+		<div class="card-header">
+			<div class="text-right">
+				<button
+					class="btn bgm-lightgreen btn-icon waves-effect waves-circle"
+					popover-placement="top" popover-trigger="mouseenter"
+					popover="Inserir Novo Jogo" ng-click="openModalInserirJogo()">
+					<i class="zmdi zmdi-plus"></i>
+				</button>
+			</div>
+			<h4 class="modal-title text-center">TABELA DE JOGOS</h4>
+		</div>
+
+
+
+		<div class="card-body">
+			<div class="table-responsive">
+
+				<div class="input-group inputBuscar">
+					<span class="input-group-addon" id="basic-addon1"><i
+						id="buscarCenarios" class="fa fa-search-plus"></i></span> <input
+						style="width: 99%" type="text" class="form-control bgm-blue-realizado text-center"
+						placeholder="Buscar..." ng-model="buscar"
+						aria-describedby="basic-addon1">
+				</div>
+				<table ng-table="tctrl.tableFilter"
+					class="table table-striped table-vmiddle"
+					style="text-align: center;" show-filter="true">
+					<thead>
+						<tr>
+							<th class="label-th" style="width: 4%; text-align: center;">#</th>
+							<th class="label-th" style="width: 18%; text-align: center;">JOGO</th>
+							<th class="label-th" style="width: 12%; text-align: center;">CAMPEONATO</th>
+							<th class="label-th" style="width: 6%; text-align: center;">DATA</th>
+							<th class="label-th" style="width: 6%; text-align: center;">HORA</th>
+							<th class="label-th" style="width: 8%; text-align: center;">RESULTADO
+								CASA</th>
+							<th class="label-th" style="width: 8%; text-align: center;">RESULTADO
+								FORA</th>
+							<th class="label-th" style="width: 10%; text-align: center;">INSERIR
+								RESULTADO</th>
+<!-- 							<th class="label-th" style="width: 4%; text-align: center;">APOSTAS REALIZADAS</th> -->
+							<th class="label-th" style="width: 4%; text-align: center;">TAXAS/LIMITES</th>
+							<th class="label-th" style="width: 4%; text-align: center;">EDITAR</th>
+							<th class="label-th" style="width: 4%; text-align: center;">EXCLUIR</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							dir-paginate="w in jogos | filter:buscar |  orderBy:'-sequencial'| itemsPerPage: 5 "
+							pagination-id="ListaDeJogos" at-implicit
+							at-attribute="name">
+							<td data-title="'CD_CODIGO'" filter="{ 'id': 'text' }">{{
+								$index + 1 }}</td>
+							<td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">{{
+								w.jogo }}</td>
+							<td data-title="'HORA'" filter="{ 'email': 'text' }">{{
+								w.campeonatoVO.nome }}</td>
+							<td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+								{{ w.dataJogoFormatadaBasica }}</td>
+								<td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+								{{ w.horaInicialJogo }}</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+								{{ w.resultadoJogoVO.resultadoCasa }}</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+								{{ w.resultadoJogoVO.resultadoFora }}</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+								<button
+									class="btn bgm-orange btn-icon waves-effect waves-circle"
+									popover-placement="top" popover-trigger="mouseenter"
+
+									popover="Inserir Resultado do Jogo  {{ w.jogo }}" ng-click="openModalGerenciarResultadoJogo(w)">
+
+									<i class="zmdi zmdi-file-plus zmdi-hc-fw"></i>
+								</button>
+							</td>
+<!-- 							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }"> -->
+<!-- 								<button -->
+<!-- 									class="btn bgm-orange btn-icon waves-effect waves-circle" -->
+<!-- 									popover-placement="top" popover-trigger="mouseenter" -->
+<!-- 									popover="Apostas Realizadas do Jogo {{ w.jogo }}" ng-click="openModalApostaRealizada(w)"> -->
+<!-- 									<i class="zmdi zmdi-shield-check zmdi-hc-fw"></i> -->
+<!-- 								</button> -->
+<!-- 							</td> -->
+<!-- 							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }"> -->
+<!-- 								<button -->
+<!-- 									class="btn bgm-orange btn-icon waves-effect waves-circle" -->
+<!-- 									popover-placement="top" popover-trigger="mouseenter" -->
+<!-- 									popover="Taxas e Limites do Jogo  {{ w.jogo }}" ng-click="openModaTaxaLimite(w)"> -->
+<!-- 									<i class="zmdi zmdi-chart zmdi-hc-fw"></i> -->
+<!-- 								</button> -->
+<!-- 							</td> -->
+                        <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+								<button
+									class="btn bgm-orange btn-icon waves-effect waves-circle"
+									popover-placement="top" popover-trigger="mouseenter"
+									popover="Taxas e Limites do Jogo  {{ w.jogo }}" ng-click="openModaTaxaLimiteAdmin(w)">
+									<i class="zmdi zmdi-chart zmdi-hc-fw"></i>
+								</button>
+							</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+								<button class="btn bgm-teal btn-icon waves-effect waves-circle"
+									popover-placement="top" popover-trigger="mouseenter"
+									popover="Editar Jogo  {{ w.jogo }}" ng-click="editarJogo(w)">
+									<i class="zmdi zmdi-edit"></i>
+								</button>
+							</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+								<button type="button" ng-click="remover(w)"
+									class="btn btn-danger btn-icon waves-effect waves-circle"
+									popover-placement="top" popover-trigger="mouseenter"
+									popover="Excluir Jogo  {{ w.jogo }}">
+									<i class="zmdi zmdi-close"></i>
+								</button>
+							</td>
+					<tfoot>
+						<tr>
+							<td class="text-center" st-pagination="" st-items-by-page="10"
+								colspan="10"><dir-pagination-controls
+									pagination-id="ListaDeJogos"
+									class="modal-title text-center" max-size="5"
+									direction-links="true" boundary-links="true">
+								</dir-pagination-controls></td>
+						</tr>
+					</tfoot>
+					
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+

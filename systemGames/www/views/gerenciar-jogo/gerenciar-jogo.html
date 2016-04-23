@@ -1,0 +1,356 @@
+<meta charset="utf-8">
+
+
+<div class="container">
+
+	<div class="card">
+		<div class="card-header">
+			<h4 class="modal-title text-center">TABELA DE JOGOS</h4>
+		</div>
+
+
+
+		<div class="card-body">
+			<div class="table-responsive">
+
+				<table class="table table-striped"
+					   style="text-align: center;">
+				<tr>
+
+					<td class="col-md-4">JOGO</td>
+					<td class="col-md-1" style="width: 10%; text-align: center;">CASA</td>
+					<td class="col-md-1" style="width: 10%; text-align: center;">EMPATE</td>
+					<td class="col-md-1" style="width: 10%; text-align: center;">FORA</td>
+					<td class="col-md-1" style="width: 10%; text-align: center;">+1,5</td>
+					<td class="col-md-1" style="width: 10%; text-align: center;">DUPLA</td>
+					<td class="col-md-1" style="width: 10%; text-align: center;">AMBOS</td>
+				</tr>
+				</table>
+
+				<table class="table table-striped" style="text-align: center;" ng-repeat="w in campeonatos">
+
+
+
+					<tr>
+						<td colspan="7" class="td-campeonato">{{w.nome}}</td>
+					</tr>
+
+					<tbody ng-repeat="jogo in jogos" ng-if="jogo.jogoVO.campeonatoVO.sequencial === w.sequencial ">
+
+
+					<tr>
+						<td class="col-md-3">
+							<p class="paragrafo-tabela">{{jogo.jogoVO.jogo}}</p>{{jogo.jogoVO.dataJogoFormatadaBasica +' - '+ jogo.jogoVO.horaInicialJogo}}
+						</td>
+						<td class="col-md-1">
+							<button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.casa}}</button>
+						</td>
+						<td class="col-md-1">
+							<button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.empate}}</button>
+						</td>
+						<td class="col-md-1">
+							<button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.fora}}</button>
+						</td>
+						<td class="col-md-1">
+							<button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.golEMeio}}</button>
+						</td>
+						<td class="col-md-1">
+							<button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.duplaChance}}</button>
+						</td>
+						<td class="col-md-1">
+							<button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.ambos}}</button>
+						</td>
+					</tr>
+					</tbody>
+
+					<!--	<tr>
+                            <td colspan="7" class="td-campeonato">{{campeonatos[1].nome}}</td>
+                        </tr>
+                        <tbody ng-repeat="jogo in jogos" ng-if="jogo.jogoVO.campeonatoVO.sequencial === campeonatos[1].sequencial  ">
+
+                        <tr>
+                            <td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">
+                                <p class="paragrafo-tabela">{{jogo.jogoVO.jogo}}</p>{{jogo.jogoVO.dataJogoFormatadaBasica +' - '+ jogo.jogoVO.horaInicialJogo}}
+                            </td>
+                            <td data-title="'HORA'" filter="{ 'email': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.casa}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.empate}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.fora}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.golEMeio}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.duplaChance}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.ambos}}</button>
+                            </td>
+                        </tr>
+                        <tr ng-if="jogo.jogoVO.campeonatoVO.sequencial === 1 ">
+
+                        </tr>
+
+                        </tbody>
+
+                        <tr>
+                            <td colspan="7" class="td-campeonato">{{campeonatos[2].nome}}</td>
+                        </tr>
+                        <tbody ng-repeat="jogo in jogos" ng-if="jogo.jogoVO.campeonatoVO.sequencial === campeonatos[2].sequencial  ">
+
+                        <tr>
+                            <td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">
+                                <p class="paragrafo-tabela">{{jogo.jogoVO.jogo}}</p>{{jogo.jogoVO.dataJogoFormatadaBasica +' - '+ jogo.jogoVO.horaInicialJogo}}
+                            </td>
+                            <td data-title="'HORA'" filter="{ 'email': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.casa}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.empate}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.fora}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.golEMeio}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.duplaChance}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.ambos}}</button>
+                            </td>
+                        </tr>
+                        <tr ng-if="jogo.jogoVO.campeonatoVO.sequencial === 1 ">
+
+                        </tr>
+
+                        </tbody>
+                        <tr>
+                            <td colspan="7" class="td-campeonato">{{campeonatos[3].nome}}</td>
+                        </tr>
+                        <tbody ng-repeat="jogo in jogos" ng-if="jogo.jogoVO.campeonatoVO.sequencial === campeonatos[3].sequencial  ">
+
+                        <tr>
+                            <td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">
+                                <p class="paragrafo-tabela">{{jogo.jogoVO.jogo}}</p>{{jogo.jogoVO.dataJogoFormatadaBasica +' - '+ jogo.jogoVO.horaInicialJogo}}
+                            </td>
+                            <td data-title="'HORA'" filter="{ 'email': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.casa}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.empate}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.fora}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.golEMeio}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.duplaChance}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.ambos}}</button>
+                            </td>
+                        </tr>
+                        <tr ng-if="jogo.jogoVO.campeonatoVO.sequencial === 1 ">
+
+                        </tr>
+
+                        </tbody>
+                        <tr>
+                            <td colspan="7" class="td-campeonato">{{campeonatos[4].nome}}</td>
+                        </tr>
+                        <tbody ng-repeat="jogo in jogos" ng-if="jogo.jogoVO.campeonatoVO.sequencial === campeonatos[4].sequencial  ">
+
+                        <tr>
+                            <td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">
+                                <p class="paragrafo-tabela">{{jogo.jogoVO.jogo}}</p>{{jogo.jogoVO.dataJogoFormatadaBasica +' - '+ jogo.jogoVO.horaInicialJogo}}
+                            </td>
+                            <td data-title="'HORA'" filter="{ 'email': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.casa}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.empate}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.fora}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.golEMeio}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.duplaChance}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.ambos}}</button>
+                            </td>
+                        </tr>
+                        <tr ng-if="jogo.jogoVO.campeonatoVO.sequencial === 1 ">
+
+                        </tr>
+
+                        </tbody>
+
+                        <tr>
+                            <td colspan="7" class="td-campeonato">{{campeonatos[5].nome}}</td>
+                        </tr>
+                        <tbody ng-repeat="jogo in jogos" ng-if="jogo.jogoVO.campeonatoVO.sequencial === campeonatos[5].sequencial  ">
+
+                        <tr>
+                            <td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">
+                                <p class="paragrafo-tabela">{{jogo.jogoVO.jogo}}</p>{{jogo.jogoVO.dataJogoFormatadaBasica +' - '+ jogo.jogoVO.horaInicialJogo}}
+                            </td>
+                            <td data-title="'HORA'" filter="{ 'email': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.casa}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.empate}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.fora}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.golEMeio}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.duplaChance}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.ambos}}</button>
+                            </td>
+                        </tr>
+                        <tr ng-if="jogo.jogoVO.campeonatoVO.sequencial === 1 ">
+
+                        </tr>
+
+                        </tbody>
+
+                        <tr>
+                            <td colspan="7" class="td-campeonato">{{campeonatos[6].nome}}</td>
+                        </tr>
+                        <tbody ng-repeat="jogo in jogos" ng-if="jogo.jogoVO.campeonatoVO.sequencial === campeonatos[6].sequencial  ">
+
+                        <tr>
+                            <td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">
+                                <p class="paragrafo-tabela">{{jogo.jogoVO.jogo}}</p>{{jogo.jogoVO.dataJogoFormatadaBasica +' - '+ jogo.jogoVO.horaInicialJogo}}
+                            </td>
+                            <td data-title="'HORA'" filter="{ 'email': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.casa}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.empate}}</button>
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.fora}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.golEMeio}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.duplaChance}}</button>
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                <button	class="btn btn-primary btn-icon waves-effect waves-circle">{{jogo.ambos}}</button>
+                            </td>
+                        </tr>
+                        </tbody>-->
+
+
+
+
+                        <tfoot>
+
+                        </tfoot>
+                    </table>
+
+                <table>
+
+                    <td><button class="btn btn-primary btn-block waves-effect" type="button" ng-click="imprimirTabelaJogos(jogos)">IMPRIMIR</button></td>
+
+                </table>
+
+
+
+                <page size="A4" class="" id="PDFtoPrint" ng-show="mostrar">
+
+                    <table
+                            class="table table-striped table-vmiddle"
+                            style="text-align: center;" >
+                        <thead>
+                        <tr>
+
+
+                            <th class="label-th" style="width: 20%; text-align: center;">JOGO</th>
+                            <th class="label-th" style="width: 20%; text-align: center;">CAMPEONATO</th>
+                            <th class="label-th" style="width: 10%; text-align: center;">CASA</th>
+                            <th class="label-th" style="width: 10%; text-align: center;">EMPATE</th>
+                            <th class="label-th" style="width: 10%; text-align: center;">FORA</th>
+                            <th class="label-th" style="width: 10%; text-align: center;">GOL
+                                E MEIO</th>
+                            <th class="label-th" style="width: 10%; text-align: center;">DUPLA
+                                CHANCE</th>
+                            <th class="label-th" style="width: 10%; text-align: center;">AMBOS</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr
+                                at-attribute="name"  ng-repeat="jogo in jogos | orderBy: 'jogoVO.campeonatoVO.nome' " >
+                            <td data-title="'CD_CODIGO'" filter="{ 'id': 'text' }">
+                                {{jogo.jogoVO.jogo}}</td>
+
+                            <td data-title="'CD_CODIGO'" filter="{ 'id': 'text' }">
+                                {{jogo.jogoVO.campeonatoVO.nome}}</td>
+
+                            <td data-title="'HORA'" filter="{ 'email': 'text' }">
+
+
+                                {{jogo.casa}}
+
+
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                {{jogo.empate}}
+                            </td>
+                            <td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+                                {{jogo.fora}}
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                {{jogo.golEMeio}}
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                {{jogo.duplaChance}}
+                            </td>
+                            <td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+                                {{jogo.ambos}}
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+
+
+
+                        </tfoot>
+
+
+                    </table>
+                </page>
+
+
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+

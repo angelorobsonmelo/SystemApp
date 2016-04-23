@@ -1,0 +1,188 @@
+
+<meta charset="utf-8">
+
+
+<div class="container" data-ng-controller="tableCtrl as tctrl">
+
+	<div class="card">
+		<div class="card-header">
+			<h4 class="modal-title text-center">APURAÇÃO</h4>
+		</div>
+
+
+
+		<div class="card-body">
+			<div class="table-responsive">
+				<form name="mainForm" ng-submit="" >
+				<!--<div class="col-sm-2 m-b-5">
+					<p class="f-500 c-black m-b-15">Cidade</p>
+					<select class="form-control" style="width: 80%" id="esporte"
+						name="esporte" ng-model="jogo.esporteVO.sequencial" required>
+						<option ng-repeat="item in esportes" value="{{ item.sequencial }}"
+							ng-selected="jogo.esporteVO.sequencial == item.sequencial"
+							ng-bind="item.nome"></option>
+						<option value="" selected>Selecione...</option>
+					</select>
+				</div>-->
+
+				<!--<div class="col-sm-2 m-b-5">
+					<p class="f-500 c-black m-b-15">Cambista</p>
+					<select class="form-control" name="campeonato" id=""
+						style="width: 104%" ng-model="aposta.sequencial"
+						required>
+						<option ng-repeat="item in cambistas"
+							value="{{ item.sequencial }}"
+							ng-selected="cambista.usuarioVO.sequencial == item.sequencial"
+							ng-bind="item.apelido"></option>
+						<option value="" selected>Selecione...</option>
+					</select>
+				</div>
+				<div class="col-sm-2 m-b-5">
+					<p class="f-500 c-black m-b-15">Campeonato</p>
+					<select class="form-control" name="campeonato" id="campeonato"
+						style="width: 104%" ng-model="jogo.campeonatoVO.sequencial"
+						required>
+						<option ng-repeat="item in campeonatos"
+							value="{{ item.sequencial }}"
+							ng-selected="jogo.campeonatoVO.sequencial == item.sequencial"
+							ng-bind="item.nome"></option>
+						<option value="" selected>Selecione...</option>
+					</select>
+				</div>
+-->
+				<div class="col-sm-2 m-b-5">
+					<div class="card-padding">
+						<div class="fg-line" ng-class="{ 'fg-toggled': opened == true }">
+							<p class="f-12 c-black">Data Inicio</p>
+							<input type="date" ng-model="aposta.dtInicial" class="form-control"/>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-2 m-b-5">
+					<div class="card-padding">
+						<div class="fg-line" ng-class="{ 'fg-toggled': opened == true }">
+							<p class="f-12 c-black">Data Final</p>
+							<input type="date" ng-model="aposta.dtFinal" class="form-control"/>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-sm-2 m-b-5">
+					<p class="f-500 c-black m-b-15">Código da Aposta</p>
+					<div class="input-group">
+						<span class="input-group-addon"><i
+							class="fa fa-search-plus"></i></span>
+						<div class="fg-line">
+							<input type="text" class="form-control text-center" name="jogo"
+								id="jogo" placeholder="" ng-model="aposta.codigo">
+						</div>
+					</div>
+				</div>
+
+				<button type="button" ng-click="listarAposta(aposta)"  class="btn bgm-orange btn-icon waves-effect waves-circle"><i class="zmdi zmdi-search"></i></button>
+				</form>
+
+				<table ng-table="tctrl.tableFilter"
+					class="table table-striped table-vmiddle"
+					style="text-align: center;" show-filter="true">
+					<thead>
+						<tr>
+
+							<th class="label-th" style="width: 4%; text-align: center;">ID</th>
+							<th class="label-th" style="width: 15%; text-align: center;">CAMBISTA</th>
+							<th class="label-th" style="width: 10%; text-align: center;">DATA
+								APOSTA</th>
+							<th class="label-th" style="width: 10%; text-align: center;">VALOR
+								APOSTADO</th>
+							<th class="label-th" style="width: 10%; text-align: center;">VALOR
+								COMISSÃO</th>
+							<th class="label-th" style="width: 10%; text-align: center;">RETORNO
+								POSSÍVEL</th>
+							<th class="label-th" style="width: 10%; text-align: center;">APOSTADOR</th>
+							<th class="label-th" style="width: 5%; text-align: center;">DETALHES</th>
+							<th class="label-th" style="width: 5%; text-align: center;">CANCELAR</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr dir-paginate="w in apostas | filter:buscar | itemsPerPage: 20 |  orderBy:'-sequencial'"
+							pagination-id="ListaDeApostas" at-implicit
+							at-attribute="name">
+							<td data-title="'CD_CODIGO'" filter="{ 'id': 'text' }">
+								{{w.sequencial }}</td>
+							<td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">{{
+								w.cambistaVO.apelido }}</td>
+							<td data-title="'HORA'" filter="{ 'email': 'text' }">{{
+								w.teste }}</td>
+							<td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">{{
+								w.valApostado }}</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{w.valComissao | number : 2 }}</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{w.valRetornoPossivel}}</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{w.nomeApostador}}</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+								<button
+									class="btn bgm-orange btn-icon waves-effect waves-circle"
+									popover-placement="top" popover-trigger="mouseenter"
+									popover="Mais dados sobre aposta"
+									ng-click="openModalVizulizarDadosAposta(w)">
+									<i class="zmdi zmdi-search"></i>
+								</button>
+							</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+								<button class="btn btn-danger btn-icon waves-effect waves-circle" popover-placement="top" popover-trigger="mouseenter" ng-click="cancelarApostaErrada(w)" popover="Cancelar Aposta">
+									<i class="zmdi zmdi-close"></i>
+								</button>
+							</td>
+
+					<tfoot>
+						<tr>
+							<td class="text-center" st-pagination="" st-items-by-page="10"
+								colspan="10"><dir-pagination-controls
+									pagination-id="ListaDeApostas" class="modal-title text-center"
+									max-size="5" direction-links="true" boundary-links="true">
+								</dir-pagination-controls></td>
+						</tr>
+					</tfoot>
+					</tr>
+					</tbody>
+
+				</table>
+
+				<table ng-table="tctrl.tableFilter"
+					   class="table table-striped table-vmiddle"
+					   style="text-align: center;" show-filter="true">
+					<thead>
+					<tr>
+						<th class="label-th" style="width: 15%; text-align: center;">Nº DE APOSTAS</th>
+						<th class="label-th" style="width: 10%; text-align: center;">TOTAL APOSTADO</th>
+						<th class="label-th" style="width: 10%; text-align: center;">TOTAL PAGO</th>
+						<th class="label-th" style="width: 10%; text-align: center;">TOTAL COMISSÃO</th>
+						<th class="label-th" style="width: 10%; text-align: center;">TOTAL LÍQUIDO</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr at-implicit	at-attribute="name">
+					<td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">{{
+						numAposta }}</td>
+					<td data-title="'HORA'" filter="{ 'email': 'text' }">{{
+						tt | number : 2 }}</td>
+					<td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+						{{ valorPago | number : 2 }}</td>
+					<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{tcomissao | number : 2}}</td>
+					<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{tliquido | number : 2}}</td>
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+

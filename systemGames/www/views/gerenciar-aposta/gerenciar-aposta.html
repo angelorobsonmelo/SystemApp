@@ -1,0 +1,318 @@
+<meta charset="utf-8">
+
+
+<div class="container">
+
+	<div class="col-md-9">
+		<div class="card">
+
+			<div class="card-header">
+				<h3 class="modal-title text-center">REALIZAR APOSTAS</h3>
+
+			</div>
+
+			<div class="card-body">
+				<div class="table-responsive">
+					<div class="col-sm-6 m-b-5">
+						<p class="f-500 c-black m-b-15">Listar Campeonato</p>
+						<select class="form-control" name="campeonato"
+							 id="campeonato"
+							style="width: 104%" ng-model="jogo.campeonatoVO.sequencial"
+								ng-change="listarJogoPorCampeonato(jogo.campeonatoVO.sequencial)"
+							required>
+							<option ng-repeat="item in campeonatos"
+								value="{{ item.sequencial }}"
+								ng-selected="jogo.campeonatoVO.sequencial == item.sequencial"
+								ng-bind="item.nome"></option>
+							<option value="" selected>Listar Todos</option>
+						</select>
+					</div>
+					<div class="col-sm-6 m-b-5">
+						<p class="f-500 c-black m-b-15">Buscar Jogo</p>
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="zmdi zmdi-globe-alt zmdi-hc-fw"></i></span>
+							<div class="fg-line">
+								<input type="text" class="form-control text-center" name="jogo"
+									id="jogo" placeholder="Buscar Jogo..." ng-model="buscar"
+									ng-required="true">
+							</div>
+						</div>
+					</div>
+					<table class="table table-striped"
+						   style="text-align: center;" show-filter="true">
+						<thead>
+						<tr class="td-aposta">
+							<td class="col-md-2">JOGO</td>
+							<td class="col-md-1" style="width: 10%; text-align: center;">CASA</td>
+							<td class="col-md-1" style="width: 10%; text-align: center;">EMPATE</td>
+							<td class="col-md-1" style="width: 10%; text-align: center;">FORA</td>
+							<td class="col-md-1" style="width: 10%; text-align: center;">+1,5</td>
+							<td class="col-md-2" style="width: 10%; text-align: center;">DUPLA</td>
+							<td class="col-md-2" style="width: 10%; text-align: center;">AMBOS</td>
+						</tr>
+						</thead>
+						<tbody ng-repeat="jogo in jogos">
+
+
+						<tr>
+							<td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">
+								<p class="paragrafo-tabela">{{jogo.jogoVO.jogo}}</p>{{jogo.jogoVO.dataJogoFormatadaBasica +' - '+ jogo.jogoVO.horaInicialJogo}}
+							</td>
+							<td data-title="'HORA'" filter="{ 'email': 'text' }">
+								<button	class="btn btn-primary btn-icon waves-effect waves-circle"
+										   ng-click="addItem(jogo,jogo.casa,'Casa',jogos[$index]); focarValorDaAposta()">{{jogo.casa}}</button>
+
+							</td>
+							<td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+								<button	class="btn btn-primary btn-icon waves-effect waves-circle"
+										   ng-click="addItem(jogo,jogo.empate,'Empate',jogos[$index]); focarValorDaAposta()">{{jogo.empate}}</button>
+							</td>
+							<td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">
+								<button
+										class="btn btn-primary btn-icon waves-effect waves-circle"
+										ng-click="addItem(jogo,jogo.fora,'Fora',jogos[$index]); focarValorDaAposta()">{{jogo.fora}}</button>
+							</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+								<button
+										class="btn btn-primary btn-icon waves-effect waves-circle"
+										ng-click="addItem(jogo,jogo.golEMeio,'Gol e Meio',jogos[$index]); focarValorDaAposta()">{{jogo.golEMeio}}</button>
+							</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+								<button
+										class="btn btn-primary btn-icon waves-effect waves-circle"
+										ng-click="addItem(jogo,jogo.duplaChance,'Dupla Chance',jogos[$index]); focarValorDaAposta()">{{jogo.duplaChance}}</button>
+							</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">
+								<button
+										class="btn btn-primary btn-icon waves-effect waves-circle"
+										ng-click="addItem(jogo,jogo.ambos,'Ambos',jogos[$index]); focarValorDaAposta()">{{jogo.ambos}}</button>
+							</td>
+						</tr>
+
+						</tbody>
+						<tfoot>
+						<tr>
+							<td class="text-center" st-pagination="" st-items-by-page="10"
+								colspan="10"><dir-pagination-controls
+									pagination-id="ListaDeJogos"
+									class="modal-title text-center" max-size="5"
+									direction-links="true" boundary-links="true">
+							</dir-pagination-controls></td>
+						</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+		<page size="A4" class="" id="PDFtoPrint" ng-show="mostrar">
+
+					<table  class="text-center ttt">
+						<thead>
+
+							<th  class="text-center"><strong>{{usuario.usuarioVO.empresaVO.nome}}</strong></th>
+							<tr >
+
+								<td class=""><strong>{{'Codigo: ' + codigoGerado }}</strong><br/></td>
+							</tr>
+							<tr>
+								<td class="">{{'Apostador: ' + aposta.nomeApostador}}<br/></td>
+							</tr>
+							<tr>
+								<td class=""><strong>{{data}}</strong></td>
+
+
+							</tr>
+							<tr>
+								<td>
+									<p  class="borda-cupom"></p><!--<hr id="borda-cupom"/>-->
+								</td>
+							</tr>
+
+						</thead>
+
+						<tbody ng-repeat="w in items.jogos">
+						<tr >
+
+								<td class=""><strong>{{w.jogoApostado}}</strong><br/></td>
+						</tr>
+						<tr>
+								<td class="">{{w.dataJogo}} - {{w.horaJogo}}<br/></td>
+						</tr>
+						<tr>
+								<td class="" data-ng-model="item.apostaC"><strong>{{w.tipoAposta}}{{w.valTaxa}}</strong></td>
+
+
+						</tr>
+						<tr>
+							<td>
+								<p  class="borda-cupom"></p><!--<hr id="borda-cupom"/>-->
+							</td>
+						</tr>
+						</tbody>
+						<tfoot>
+
+						<tr>
+							<td><strong>Possível Retorno: {{valorTtotal * 1 * aposta.valApostado  | currency}}</strong></td>
+						</tr>
+						<tr>
+							<td><strong>Quantidade de jogos: {{items.jogos.length}}</strong></td>
+						</tr>
+						<tr>
+							<td><strong>Valor Apostado: {{aposta.valApostado}}</strong></td>
+						</tr>
+						<tr>
+							<td>
+								<p  class="borda-cupom"></p><!--<hr id="borda-cupom"/>-->
+							</td>
+						</tr>
+						<tr>
+							<td><strong>Cambista: {{usuario.apelido}}</strong></td>
+						</tr>
+						<tr>
+							<td><strong>Telefone: {{usuario.contato}}</strong></td>
+						</tr>
+						<tr>
+							<td>
+								<p  class="borda-cupom"></p><!--<hr id="borda-cupom"/>-->
+							</td>
+						</tr>
+						<tr>
+							<td><strong>Apostas Realizadas apos o inicio de um dos eventos esportivos, sera cancelada, e devolvido o valor apostado.</strong></td>
+						</tr>
+						</tfoot>
+					</table>
+				</page>
+	<div class="col-md-3">
+
+	
+		<form ng-submit="salvarAposta()" name="mainForm">
+			<div class="card">
+				<div class="lv-item">
+				<div class="lv-title m-b-0 text-center"><strong>CUPOM DE APOSTA<p>{{'Limite: '+limiteAtual}}</p></strong></div>
+				<div class="progress">
+					<div class="progress-bar progress-bar-info" role="progressbar"
+						aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+						style="width: 100%">
+						<span class="sr-only"></span>
+					</div>
+				</div>
+			</div>
+			<div class="card-padding p-15">
+				<br />
+
+				<!--<div>
+                            <ul class="nav">
+                                &lt;!&ndash;<input type="text" value="ItemName"
+                                       placeholder="name of new item...">&ndash;&gt;
+                                &lt;!&ndash;<button ng-click="addItem(newItemName)">Add Me</button> &ndash;&gt;
+                                <li ng-repeat="item in items.jogos" id="">
+                                    <a href="#">{{item.jogo}}</a> <a href="#">{{item.dataJogo}}</a> <a href="#">{{item.aposta}}</a>  <a ng-click="deleteItem($index)" class="delete-item">x</a>
+                                </li>
+                            </ul>
+                        </div>-->
+
+
+				<div class="row" ng-repeat="item in items.jogos"
+					id="item{{item.id}}">
+					<div class="col-sm-12 m-b-30 cor-card-aposta">							
+							<i class="fa fa-times remover-card-aposta groove" ng-click="deleteItem($index)"></i>
+							<p class="f-14 c-black m-b-5 col-sm-12"><strong>{{item.jogoApostado}}</strong></p>
+							<p class="f-14 c-black m-b-5 col-sm-12">{{item.dataJogo}} - {{item.horaJogo}}h</p>
+							<p class="f-14 c-black m-b-5 col-sm-12" data-ng-model="item.apostaC"><strong>{{item.tipoAposta+' :'}}{{item.valTaxa}}</strong></p>
+						
+					</div>
+
+				</div>
+				<div class="col-sm-4 m-t-5">
+					<p class="c-black m-b-0 title-valor-apostado">Valor</p>
+				</div>
+				<div class="col-sm-8 m-b-5">
+					<div class="input-group m-b-20">
+						<div>
+							<input type="text" id="focar-valor-apostado"
+								class="form-control c-red bgm-blue-aposta text-center"
+								ng-model="aposta.valApostado" name="valor" placeholder="Valor Apostado" required>
+						</div>
+					</div>
+					<p ng-show="mainForm.valor.$invalid && !mainForm.valor.$pristine" class="help-block">Campo obrigatório</p>
+				</div>
+				<div class="div-possivel-retorno">
+					<div class="input-group">
+						<div class="fg-line">
+							<p ng-model="aposta.valRetornoPossivel"><strong>Possível Retorno: {{valorTtotal * 1 * aposta.valApostado  | currency}}</strong></p>
+						</div>
+					</div>
+	
+					<div class="input-group">
+						<div class="fg-line">
+							<p ng-model="aposta.qtdJogos"><strong>Quantidade de jogos: {{items.jogos.length}}</strong></p>
+						</div>
+					</div>
+				</div>
+
+				<div class="input-group m-b-20">
+					<div class="input-group">
+						<input type="text"
+							class="form-control c-red bgm-blue-aposta text-center"
+							placeholder="Apostador" name="apostador" ng-model="aposta.nomeApostador" required>
+					</div>
+					<p ng-show="mainForm.apostador.$invalid && !mainForm.apostador.$pristine" class="help-block">Campo obrigatório</p>
+				</div>
+
+				<button class="btn btn-primary btn-block waves-effect" ng-disabled="mainForm.$invalid" type="submit">CONFIRMAR</button>
+
+
+				
+					
+			
+				
+				<!--<input type="button" value="Print" onclick="document.getElementById('PDFtoPrint').window.print();">-->
+
+
+				<!--<div class="col-sm-12 m-b-5">
+                            <p class="f-14 c-black m-b-5">Voce escolher <strong>"Empate"</strong></p>
+                                <p class="f-12 c-black m-b-5">Hull x Arsenal </p>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="zmdi zmdi-money zmdi-hc-fw"></i></span>
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control c-red bgm-red-limite text-center" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 m-b-5">
+                            <p class="f-14 c-black m-b-5">Voce escolher <strong>"Fora"</strong></p>
+                                <p class="f-12 c-black m-b-5">Wolfsburg x Gent </p>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="zmdi zmdi-money zmdi-hc-fw"></i></span>
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control c-red bgm-red-limite text-center" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 m-b-5">
+                                <p class="f-12 c-black m-b-5">Total de cotas</p>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i></span>
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control c-blue bgm-blue-realizado text-center" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 m-b-5">
+                                <div class="input-group">
+                                    <div class="fg-line">
+                                        <button class="btn bgm-lightgreen waves-effect">Apostar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+
+			</div>
+			</div>
+		</form>
+		</div>
+	</div>

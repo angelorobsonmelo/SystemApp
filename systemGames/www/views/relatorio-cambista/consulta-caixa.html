@@ -1,0 +1,133 @@
+
+<meta charset="utf-8">
+
+
+<div class="container" >
+
+	<div class="card">
+		<div class="card-header">
+			<h4 class="modal-title text-center">VISUALIZAR BILHETE</h4>
+		</div>
+
+
+
+		<div class="card-body">
+			<div class="table-responsive">
+
+				<form name="mainForm">
+				
+				<div class="col-sm-2 m-b-5">
+					<p class="f-500 c-black m-b-15">Código da Aposta</p>
+					<div class="input-group">
+						<span class="input-group-addon"><i
+								class="fa fa-search-plus"></i></span>
+						<div class="fg-line">
+							<input type="text" class="form-control text-center" name="jogo"
+								   id="jogo" placeholder=""
+								   ng-required="true" ng-model="aposta.codigo" ng-required="true">
+						</div>
+					</div>
+				</div>
+
+
+
+				<button type="button" ng-click="listarBilhete(aposta)" ng-disabled="mainForm.$invalid" class="btn bgm-orange btn-icon waves-effect waves-circle"><i class="zmdi zmdi-search"></i></button>
+				</form>
+				<table class="table table-striped table-vmiddle"
+					   style="text-align: center;" show-filter="true">
+					<thead>
+					<tr>
+						<th class="label-th" style="width: 15%; text-align: center;">CLIENTE</th>
+						<th class="label-th" style="width: 10%; text-align: center;">VALOR DA APOSTA</th>
+						<th class="label-th" style="width: 10%; text-align: center;">Nº DE JOGOS</th>
+						<th class="label-th" style="width: 10%; text-align: center;">VALOR DO PRÊMIO</th>
+						<th class="label-th" style="width: 10%; text-align: center;">DATA</th>
+						<th class="label-th" style="width: 10%; text-align: center;">STATUS</th>
+						<th class="label-th" style="width: 5%; text-align: center;">VALOR PAGO</th>
+						<th class="label-th" style="width: 5%; text-align: center;">CANCELADO POR</th>
+						<th class="label-th" style="width: 5%; text-align: center;">CANCELADO EM</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="w in bilhete">
+						<td data-title="'CD_CODIGO'" filter="{ 'id': 'text' }">
+							{{w.nomeApostador}}</td>
+						<td data-title="'CD_CODIGO'" filter="{ 'id': 'text' }">
+							{{w.valApostado }}</td>
+						<td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">{{
+							w.qtdJogos }}</td>
+						<td data-title="'HORA'" filter="{ 'email': 'text' }">{{
+							w.valRetornoPossivel }}</td>
+						<td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">{{
+							w.dataJogoFormatadaBasica }}</td>
+						<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{resultado}}</td>
+						<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{valorPago}}</td>
+						<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{usuario}}</td>
+						<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{w.dataAlteracaoFormatadaBasica}}</td>
+					</tr>
+					</tbody>
+
+
+
+
+				</table>
+
+				<page size="A4" class="" id="PDFtoPrint" ng-show="teste">
+
+					<table class="table table-striped table-vmiddle"
+						   style="text-align: center;" show-filter="true">
+						<thead>
+						<tr>
+							<th class="label-th" style="width: 15%; text-align: center;">CLIENTE</th>
+							<th class="label-th" style="width: 10%; text-align: center;">VALOR DA APOSTA</th>
+							<th class="label-th" style="width: 10%; text-align: center;">Nº DE JOGOS</th>
+							<th class="label-th" style="width: 10%; text-align: center;">VALOR DO PRÊMIO</th>
+							<th class="label-th" style="width: 10%; text-align: center;">DATA</th>
+							<th class="label-th" style="width: 10%; text-align: center;">STATUS</th>
+							<th class="label-th" style="width: 5%; text-align: center;">VALOR PAGO</th>
+							<th class="label-th" style="width: 5%; text-align: center;">CANCELADO POR</th>
+							<th class="label-th" style="width: 5%; text-align: center;">CANCELADO EM</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="w in bilhete">
+							<td data-title="'CD_CODIGO'" filter="{ 'id': 'text' }">
+								{{w.nomeApostador}}</td>
+							<td data-title="'CD_CODIGO'" filter="{ 'id': 'text' }">
+								{{w.valApostado }}</td>
+							<td data-title="'DATA_JOGO'" filter="{ 'name': 'text' }">{{
+								w.qtdJogos }}</td>
+							<td data-title="'HORA'" filter="{ 'email': 'text' }">{{
+								w.valRetornoPossivel }}</td>
+							<td data-title="'DS_JOGO'" filter="{ 'username': 'text' }">{{
+								w.dataJogoFormatadaBasica }}</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{resultado}}</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{valorPago}}</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{usuario}}</td>
+							<td data-title="'DS_CAMPEONATO'" filter="{ 'contact': 'text' }">{{w.dataAlteracaoFormatadaBasica}}</td>
+						</tr>
+						</tbody>
+
+
+
+
+					</table>
+				</page>
+
+
+
+			</div>
+			<button ng-click="listarDetalheBilhete()" ng-show="imprimirBilhete">imprimir</button>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+

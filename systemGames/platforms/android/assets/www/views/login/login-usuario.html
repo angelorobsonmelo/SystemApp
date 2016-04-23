@@ -1,0 +1,115 @@
+<div  ng-controller="loginCtrl as lctrl">
+
+<form ng-submit="autenticar()">
+    <!-- Login -->
+    <div class="lc-block toggled" id="l-login" >
+        <img class="img-responsive" src="img/Logo-System-games.png" alt=""/>
+        <div class="input-group m-b-20">
+            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+            <div class="fg-line">
+                <input type="text" class="form-control" placeholder="Usuário" ng-model="usuario.apelido" />
+            </div>
+        </div>
+
+        <div class="input-group m-b-20">
+            <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+            <div class="fg-line">
+                <input type="password" class="form-control" placeholder="Senha" ng-model="usuario.senha" />
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+
+
+        <button class="btn btn-login btn-danger btn-float" type="submit"><i class="zmdi zmdi-arrow-forward"></i></button>
+
+        <br/>
+
+    </div>
+
+</form>
+<!-- Register -->
+
+<div class="container" id="l-register" data-ng-class="{ 'toggled': lctrl.register === 1 }" data-ng-if="lctrl.register === 1">
+
+    <div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table ng-table="tctrl.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
+                    <tbody>
+                    <tr ng-repeat="w in $data">
+                        <td data-title="'ID'" filter="{ 'id': 'text' }">
+                            {{ w.id }}
+                        </td>
+                        <td data-title="'Name'" filter="{ 'name': 'text' }">
+                            {{ w.name }}
+                        </td>
+                        <td data-title="'Email'" filter="{ 'email': 'text' }">
+                            {{ w.email }}
+                        </td>
+                        <td data-title="'Username'" filter="{ 'username': 'text' }">
+                            {{ w.username }}
+                        </td>
+                        <td data-title="'Contact'" filter="{ 'contact': 'text' }">
+                            {{ w.contact }}
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br/>
+
+</div>
+
+
+<!-- Older IE warning message -->
+<!--[if lt IE 9]>
+<div class="ie-warning">
+    <h1 class="c-white">Warning!!</h1>
+    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+    <div class="iew-container">
+        <ul class="iew-download">
+            <li>
+                <a href="http://www.google.com/chrome/">
+                    <img src="img/browsers/chrome.png" alt="">
+                    <div>Chrome</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/">
+                    <img src="img/browsers/firefox.png" alt="">
+                    <div>Firefox</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.opera.com">
+                    <img src="img/browsers/opera.png" alt="">
+                    <div>Opera</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/">
+                    <img src="img/browsers/safari.png" alt="">
+                    <div>Safari</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                    <img src="img/browsers/ie.png" alt="">
+                    <div>IE (New)</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
+</div>

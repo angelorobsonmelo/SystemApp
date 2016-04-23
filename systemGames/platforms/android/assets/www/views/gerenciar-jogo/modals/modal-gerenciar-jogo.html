@@ -1,0 +1,431 @@
+
+<div class="background-fundo">
+	<meta charset="utf-8" />
+	<form ng-submit="salvar()" name="myForm">
+		<div class="modal-header">
+			<div class="text-right">
+				<i class="fa fa-times fa-2x botao-cancel" ng-click="cancel()"></i>
+			</div>
+			<h3 class="modal-title text-center titulo-modal">Salvar Jogo</h3>
+		</div>
+		<div id="modal-padding" class="modal-body">
+
+			<div class="modal-body">
+
+				<meta charset="utf-8">
+				<div>
+
+					<div class="container c-alt">
+
+
+						<div class="row">
+							<div class="col-md-12">
+
+								<div class="card">
+									<div class="lv-item">
+										<div class="lv-title m-b-5">&nbsp;&nbsp;GERENCIAR JOGO</div>
+										<div class="progress">
+											<div class="progress-bar progress-bar-info"
+												role="progressbar" aria-valuenow="60" aria-valuemin="0"
+												aria-valuemax="100" style="width: 100%">
+												<span class="sr-only"></span>
+											</div>
+										</div>
+									</div>
+									<div class="card-body p-10">
+										<div class="row">
+
+											<div class="col-sm-2 m-b-5">
+												<p class="f-500 c-black m-b-15">
+													Esporte
+													<button type="button"
+														class="btn bgm-lightgreen btn-xs waves-effect"
+														ng-click="openModalGerenciarEsporte()"
+														popover-placement="top" popover-trigger="mouseenter"
+														popover="Inserir Novo Esporte">
+														<i class="zmdi zmdi-plus"></i>
+													</button>
+												</p>
+												<select class="form-control" style="width: 80%" id="esporte"
+													name="esporte" ng-model="jogo.esporteVO.sequencial"
+													required>
+													<option ng-repeat="item in esportes"
+														value="{{ item.sequencial }}"
+														ng-selected="jogo.esporteVO.sequencial == item.sequencial"
+														ng-bind="item.nome"></option>
+													<option value="" selected>Selecione...</option>
+												</select>
+
+												<div ng-messages="myForm.esporte.$error"
+													ng-show="myForm.esporte.$touched">
+													<div ng-message="required">Campo obrigatório</div>
+												</div>
+
+											</div>
+
+											<div class="col-sm-3 m-b-5">
+												<p class="f-500 c-black m-b-15">
+													Campeonato
+													<button type="button"
+														class="btn bgm-lightgreen btn-xs waves-effect"
+														popover-placement="top"
+														ng-click="openModalGerenciarCampeonato()"
+														popover-trigger="mouseenter"
+														popover="Inserir Novo Campeonato">
+														<i class="zmdi zmdi-plus"></i>
+													</button>
+												</p>
+												<select class="form-control" name="campeonato"
+													id="campeonato" style="width: 104%"
+													ng-model="jogo.campeonatoVO.sequencial" required>
+													<option ng-repeat="item in campeonatos"
+														value="{{ item.sequencial }}"
+														ng-selected="jogo.campeonatoVO.sequencial == item.sequencial"
+														ng-bind="item.nome"></option>
+													<option value="" selected>Selecione...</option>
+												</select>
+
+												<div ng-messages="myForm.campeonato.$error"
+													ng-show="myForm.campeonato.$touched">
+													<div ng-message="required">Campo obrigatório</div>
+												</div>
+
+											</div>
+
+											<div class="col-sm-4 m-b-5">
+												<p class="f-500 c-black m-b-15">Jogo</p>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="zmdi zmdi-globe-alt zmdi-hc-fw"></i></span>
+													<div class="fg-line">
+														<input type="text" class="form-control text-center"
+															name="jogo" id="jogo"
+															placeholder="REAL MADRID X BARCELONA" ng-required="true"
+															ng-model="jogo.jogo">
+
+														<div ng-messages="myForm.jogo.$error"
+															ng-show="myForm.jogo.$touched">
+															<div ng-message="required">Campo obrigatório</div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-2 m-b-5">
+												<p class="f-500 c-black m-b-15">Data</p>
+												<div class="input-group">
+													<div class="date-picker input-group"
+														ng-class="{ 'is-opened': opened == true }"
+														data-ng-controller="DatepickerDemoCtrl">
+														<div class="fg-line"
+															ng-class="{ 'fg-toggled': opened == true }">
+
+															<input ng-click="open($event, 'opened')" type="text"
+																id="dataJogo" name="dataJogo" ng-required="true"
+																class="form-control" uib-datepicker-popup="{{format}}"
+																show-weeks="false" ng-model="jogo.dataJogo"
+																is-open="opened" min-date="minDate"
+																datepicker-options="dateOptions" close-text="Close"
+																placeholder="01/01/1991" />
+														</div>
+
+														<div ng-messages="myForm.dataJogol.$error"
+															ng-show="myForm.dataJogo.$touched">
+															<div ng-message="required">Campo obrigatório</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-1 m-b-5">
+												<p class="f-500 c-black m-b-15">Hora</p>
+												<input type="text" class="form-control ng-isolate-scope"
+													id="horaInicialJogo" name="horaInicialJogo"
+													ng-required="true" data-input-mask="{mask: '00:00'}"
+													placeholder=" 00:00" maxlength="8" autocomplete="off"
+													ng-model="jogo.horaInicialJogo">
+
+												<div ng-messages="myForm.horaInicialJogo.$error"
+													ng-show="myForm.horaInicialJogo.$touched">
+													<div ng-message="required">Campo obrigatório</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="lv-item">
+										<div class="lv-title m-b-5">&nbsp;&nbsp;TAXAS / LIMITES
+											/ REALIZADO</div>
+										<div class="progress">
+											<div class="progress-bar progress-bar-info"
+												role="progressbar" aria-valuenow="60" aria-valuemin="0"
+												aria-valuemax="100" style="width: 100%">
+												<span class="sr-only"></span>
+											</div>
+										</div>
+									</div>
+
+									<div class="card">
+
+										<div class="table-responsive">
+											<table class="table table-striped text-center">
+												<thead>
+													<tr>
+														<th class="text-center">#</th>
+														<th class="text-center">Casa</th>
+														<th class="text-center">Empate</th>
+														<th class="text-center">Fora</th>
+														<th class="text-center">Gol e Meio</th>
+														<th class="text-center">Dupla Chance</th>
+														<th class="text-center">Ambos</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Taxas</td>
+														<td><input type="text" id="casa" name="casa"
+															ng-required="true"
+															class="form-control text-center bgm-red-taxa"
+															placeholder="0" ng-model="jogo.limiteApostaVO.casa" />
+
+															<div ng-messages="myForm.casa.$error"
+																ng-show="myForm.casa.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+
+
+														<td><input type="text" id="empate" name="empate"
+															ng-required="true"
+															class="form-control text-center bgm-red-taxa"
+															placeholder="0" ng-model="jogo.limiteApostaVO.empate">
+
+															<div ng-messages="myForm.empate.$error"
+																ng-show="myForm.empate.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+														<td><input type="text" id="fora" name="fora"
+															ng-required="true"
+															class="form-control text-center bgm-red-taxa"
+															placeholder="0" ng-model="jogo.limiteApostaVO.fora" />
+
+															<div ng-messages="myForm.fora.$error"
+																ng-show="myForm.fora.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+														<td><input type="text" id="golEMeio" name="golEMeio"
+															ng-required="true"
+															class="form-control text-center bgm-red-taxa"
+															placeholder="0" ng-model="jogo.limiteApostaVO.golEMeio">
+
+															<div ng-messages="myForm.golEMeio.$error"
+																ng-show="myForm.golEMeio.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+														<td><input type="text"
+															class="form-control text-center bgm-red-taxa"
+															id="duplaChance" name="duplaChance" ng-required="true"
+															placeholder="0"
+															ng-model="jogo.limiteApostaVO.duplaChance">
+
+															<div ng-messages="myForm.duplaChance.$error"
+																ng-show="myForm.duplaChance.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+														<td><input type="text" id="ambos" name="ambos"
+															ng-required="true"
+															class="form-control text-center bgm-red-taxa"
+															placeholder="0" ng-model="jogo.limiteApostaVO.ambos">
+
+															<div ng-messages="myForm.ambos.$error"
+																ng-show="myForm.ambos.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+													</tr>
+													<tr>
+														<td>Limites</td>
+														<td><input type="text" id="limiteCasa"
+															name="limiteCasa" ng-required="true"
+															class="form-control c-red bgm-red-limite text-center"
+															placeholder="0" ng-model="jogo.limiteApostaVO.limiteCasa">
+
+															<div ng-messages="myForm.limiteCasa.$error"
+																ng-show="myForm.limiteCasa.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+														<td><input type="text" id="limiteEmpate"
+															name="limiteEmpate" ng-required="true"
+															class="form-control c-red bgm-red-limite text-center"
+															placeholder="0"
+															ng-model="jogo.limiteApostaVO.limiteEmpate">
+
+															<div ng-messages="myForm.limiteEmpate.$error"
+																ng-show="myForm.limiteEmpate.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+
+														<td><input type="text" id="limiteFora"
+															name="limiteFora" ng-required="true"
+															class="form-control c-red bgm-red-limite text-center"
+															placeholder="0" ng-model="jogo.limiteApostaVO.limiteFora">
+
+															<div ng-messages="myForm.limiteFora.$error"
+																ng-show="myForm.limiteFora.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+														<td><input type="text" id="limiteGolEMeio"
+															name="limiteGolEMeio" ng-required="true"
+															class="form-control c-red bgm-red-limite text-center"
+															placeholder="0"
+															ng-model="jogo.limiteApostaVO.limiteGolEMeio">
+
+															<div ng-messages="myForm.limiteGolEMeio.$error"
+																ng-show="myForm.limiteGolEMeio.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+														<td><input type="text" id="limiteDuplaChance"
+															name="limiteDuplaChance" ng-required="true"
+															class="form-control c-red bgm-red-limite text-center"
+															placeholder="0"
+															ng-model="jogo.limiteApostaVO.limiteDuplaChance">
+
+															<div ng-messages="myForm.limiteDuplaChance.$error"
+																ng-show="myForm.limiteDuplaChance.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+														<td><input type="text" id="limiteAmbos"
+															name="limiteAmbos" ng-required="true"
+															class="form-control c-red bgm-red-limite text-center"
+															placeholder="0"
+															ng-model="jogo.limiteApostaVO.limiteAmbos">
+
+															<div ng-messages="myForm.limiteAmbos.$error"
+																ng-show="myForm.limiteAmbos.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div></td>
+													</tr>
+													<tr>
+														<td>Realizados</td>
+														<td><input type="text"
+															class="form-control c-blue bgm-blue-realizado text-center"
+															placeholder="0"></td>
+														<td><input type="text"
+															class="form-control c-blue bgm-blue-realizado text-center"
+															placeholder="0"></td>
+														<td><input type="text"
+															class="form-control c-blue bgm-blue-realizado text-center"
+															placeholder="0"></td>
+														<td><input type="text"
+															class="form-control c-blue bgm-blue-realizado text-center"
+															placeholder="0"></td>
+														<td><input type="text"
+															class="form-control c-blue bgm-blue-realizado text-center"
+															placeholder="0"></td>
+														<td><input type="text"
+															class="form-control c-blue bgm-blue-realizado text-center"
+															placeholder="0"></td>
+													</tr>
+													<tr>
+														<td>Individual</td>
+														<td>Limite<input type="text" id="limiteIndividual"
+															name="limiteIndividual" ng-required="true"
+															class="form-control c-red bgm-red-limite text-center"
+															placeholder="0"
+															ng-model="jogo.limiteApostaVO.limiteIndividual">
+
+															<div ng-messages="myForm.limiteIndividual.$error"
+																ng-show="myForm.limiteIndividual.$touched">
+																<div ng-message="required">Campo obrigatório</div>
+															</div>
+
+														</td>
+														<td>Realizado<input type="text"
+															class="form-control c-blue bgm-blue-realizado text-center"
+															placeholder="0"></td>
+
+														<td colspan="5">
+															<div class="input-group">
+																<span class="input-group-addon"></span>
+																<div class="fg-line">
+
+																	<button ng-disabled="myForm.$invalid"
+																		ng-if="!jogo.sequencial"
+																		class="btn bgm-lightgreen btn-icon waves-effect waves-circle"
+																		popover-placement="top" popover-trigger="mouseenter"
+																		popover="Salvar Jogo" type="submit">
+																		<i class="zmdi zmdi-floppy zmdi-hc-fw"></i>
+																	</button>
+
+																	<button ng-if="jogo.sequencial"
+																		class="btn bgm-lightgreen btn-icon waves-effect waves-circle"
+																		popover-placement="top" popover-trigger="mouseenter"
+																		popover="Alterar Jogo" type="submit">
+																		<i class="zmdi zmdi-floppy zmdi-hc-fw"></i>
+																	</button>
+
+																</div>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+												<tfoot>
+
+												</tfoot>
+											</table>
+
+											<div class="col-sm-12 m-b-15 align-left"></div>
+											<br />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+	</form>
+
+
+
+	<!-- <button class="btn bgm-gray btn-block waves-effect"
+		ng-click="ToggleCampeonato = !ToggleCampeonato">
+		<i class="zmdi zmdi-menu"></i> CAMPEONATO
+	</button>
+	<div uib-collapse="!ToggleCampeonato" class="in collapse"
+		aria-expanded="true" aria-hidden="false" style="height: auto;">
+		<div class="card">
+			<div class="card-header bgm-cinza-form">
+				<h2>CAMPEONATO</h2>
+			</div>
+			<button class="btn btn-danger btn-icon-text waves-effect"
+				onclick="history.back()">
+				<i class="zmdi zmdi-arrow-back"></i> Voltar
+			</button>
+			<div class="video">
+				<iframe width="640" height="400"
+					src="http://globoesporte.globo.com/futebol/campeonato/"
+					frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div> -->
+
+</div>
+
+
+
+
+
+
+</div>
+</div>
+<div class="modal-footer">
+	<!--<button class="btn btn-primary" ng-click="ok()">OK</button>
+				<button type="submit" ng-if="!cenario.sequencial"
+			ng-disabled="myForm.$invalid" class="btn btn-primary">Salvar
+		</button>
+
+		<button type="button" ng-if="cenario.sequencial"
+			ng-disabled="myForm.$invalid" ng-click="update(cenario)"
+			class="btn btn-primary">Atualizar</button>-->
+	<button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
+</form>
+</div>

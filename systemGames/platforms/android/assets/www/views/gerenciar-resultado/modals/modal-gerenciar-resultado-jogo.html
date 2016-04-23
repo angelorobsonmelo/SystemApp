@@ -1,0 +1,85 @@
+
+<div class="background-fundo">
+	<meta charset="utf-8" />
+	<form ng-submit="salvar()" name="myForm">
+		<div class="modal-header">
+			<div class="text-right">
+				<i class="fa fa-times fa-2x botao-cancel" ng-click="cancel()"></i>
+			</div>
+			<h3 class="modal-title text-center titulo-modal">Inserir
+				Resultado do Jogo " {{ jogo.jogo }} "</h3>
+		</div>
+		<div class="container">
+
+			<div class="card-imput-esporte">
+				<h2 class="modal-title text-jogo"></h2>
+				<div class="card-header style=" text-align:center;">
+
+					<div class="col-sm-4 m-b-5">
+						<div class="input-group">
+							<span class="input-group-addon"> Casa:</span>
+							<div class="fg-line">
+								<input type="text"
+									class="form-control cor-imput-azul text-center"
+									placeholder="Inserir Resultado Casa..."
+									ng-model="jogo.resultadoJogoVO.resultadoCasa">
+
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4 m-b-5">
+						<div class="input-group">
+							<span class="input-group-addon"> Fora:</span>
+							<div class="fg-line">
+								<input type="text"
+									class="form-control cor-imput-azul text-center"
+									placeholder="Inserir Resultado Fora..."
+									ng-model="jogo.resultadoJogoVO.resultadoFora">
+
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-1 m-b-5"
+						ng-if="!jogo.resultadoJogoVO.resultadoFora &&  jogo.resultadoJogoVO.resultadoFora != 0">
+						<button class="btn bgm-lightgreen waves-effect" type="submit"
+							popover-placement="top" popover-trigger="mouseenter"
+							popover="Salvar Resultado">
+							<i class="zmdi zmdi-floppy zmdi-hc-fw"></i>
+						</button>
+					</div>
+
+					<div class="col-sm-1 m-b-5"
+						ng-if="jogo.resultadoJogoVO.resultadoFora || jogo.resultadoJogoVO.resultadoFora == 0">
+						<button class="btn bgm-lightgreen waves-effect" type="button"
+							popover-placement="top" popover-trigger="mouseenter"
+							popover="Atualizar Resultado" ng-click="atualizar()">
+							<i class="zmdi zmdi-floppy zmdi-hc-fw"></i>
+						</button>
+					</div>
+
+
+					<div class="col-sm-1 m-b-5" ng-if="jogo.dataJogo >= dataAtual">
+						<button class="btn btn-danger waves-effect" type="button"
+							ng-click="remover()" popover-placement="top"
+							popover-trigger="mouseenter" popover="Excluir">
+							<i class="zmdi zmdi-close"></i>
+						</button>
+					</div>
+					<br />
+				</div>
+			</div>
+		</div>
+
+		<div class="modal-footer">
+			<!--<button class="btn btn-primary" ng-click="ok()">OK</button>
+                <button type="submit" ng-if="!cenario.sequencial"
+            ng-disabled="myForm.$invalid" class="btn btn-primary">Salvar
+        </button>
+
+        <button type="button" ng-if="cenario.sequencial"
+            ng-disabled="myForm.$invalid" ng-click="update(cenario)"
+            class="btn btn-primary">Atualizar</button>-->
+			<button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+		</div>
+	</form>
+</div>
